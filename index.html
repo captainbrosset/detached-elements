@@ -31,23 +31,47 @@
     justify-content: space-between;
   }
   
+  button {
+    border-radius: 3px;
+    border: none;
+    padding: .5rem;
+    box-shadow: 0 3px 0 0 #0004;
+    cursor: pointer;
+    background-color: #eee;
+  }
+  
+  button:hover {
+    background-color: #fff8d3;
+  }
+  
   .rooms {
     grid-column: 1;
     grid-row: 1 / -1;
     padding: 1rem;
-    background: #f3e3e2;
+    background: #a0d0ff;
   }
   
   .room {
-    padding: .5rem;
+    padding: .5rem .5rem calc(.5rem + 3px) .5rem;
     border-radius: 3px;
     background: white;
     margin-bottom: .5rem;
     cursor: pointer;
+    box-shadow: inset 0px -3px 0 0 #0004;
+  }
+  
+  .room::before {
+    content: '⚫';
+    margin-right: .5rem;
+  }
+  
+  .room:not(.active):hover {
+    background: #fff8d3;
   }
   
   .room.active {
-    background-color: #b99391;
+    background-color: #1a8cff;
+    font-weight: bold;
   }
   
   .chat {
