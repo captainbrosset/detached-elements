@@ -74,8 +74,6 @@ function getOrCreateRoom(id) {
 }
 
 function loadRoom(id) {
-    clearTimeout(FAKE_MSG_TIMEOUT);
-
     if (currentRoom) {
         currentRoom.hide();
     }
@@ -89,6 +87,17 @@ function loadRoom(id) {
     stopFakeTraffic();
 }
 
+function closeRoom(id) {
+    roomSelectorEl.querySelector(`[data-id="${id}"]`).remove();
+
+    if (rooms[id]) {
+        rooms[id] = null;
+        if (rooms[id] === currentRoom) {
+            stopFakeTraffic();
+        }
+    }
+}
+
 roomSelectorEl.addEventListener('click', e => {
     const newRoom = e.target.closest('.room:not(.active)');
     if (!newRoom) {
@@ -96,7 +105,13 @@ roomSelectorEl.addEventListener('click', e => {
     }
 
     const id = newRoom.dataset.id;
-    loadRoom(id);
+
+    const closeBtn = e.target.closest('.room .close');
+    if (closeBtn) {
+        closeRoom(id);
+    } else {
+        loadRoom(id);
+    }
 });
 
 loadRoom('r1');

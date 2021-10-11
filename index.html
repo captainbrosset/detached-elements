@@ -58,6 +58,8 @@
     margin-bottom: .5rem;
     cursor: pointer;
     box-shadow: inset 0px -3px 0 0 #0004;
+    display: flex;
+    align-items: center;
   }
   
   .room::before {
@@ -72,6 +74,26 @@
   .room.active {
     background-color: #1a8cff;
     font-weight: bold;
+  }
+  
+  .room:not(:hover) .close {
+    display: none;
+  }
+  
+  .room .close {
+    margin-left: auto;
+    background: red;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    color: #858585;
+    font-size: .7rem;
+    box-shadow: 0 1px 0 0 #ffffff7a;
   }
   
   .chat {
@@ -122,9 +144,9 @@
   <button class="send-message">Send 1 message</button>
 </div>
 <ul class="rooms">
-  <li class="room" data-id="r1">Room 1</li>
-  <li class="room" data-id="r2">Room 2</li>
-  <li class="room" data-id="r3">Room 3</li>
+  <li class="room" data-id="r1">Room 1 <span class="close" title="Leave this room">x</span></li>
+  <li class="room" data-id="r2">Room 2 <span class="close" title="Leave this room">x</span></li>
+  <li class="room" data-id="r3">Room 3 <span class="close" title="Leave this room">x</span></li>
 </ul>
 <div class="chat">
 </div>
