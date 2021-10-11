@@ -91,10 +91,17 @@ function closeRoom(id) {
     roomSelectorEl.querySelector(`[data-id="${id}"]`).remove();
 
     if (rooms[id]) {
-        rooms[id] = null;
         if (rooms[id] === currentRoom) {
             stopFakeTraffic();
+            
+            for (let i in rooms) {
+                if (id !== i) {
+                    loadRoom(i);
+                }
+            }
         }
+
+        rooms[id] = null;
     }
 }
 
@@ -105,13 +112,17 @@ roomSelectorEl.addEventListener('click', e => {
     }
 
     const id = newRoom.dataset.id;
+    loadRoom(id);
+});
 
+roomSelectorEl.addEventListener('click', e => {
     const closeBtn = e.target.closest('.room .close');
-    if (closeBtn) {
-        closeRoom(id);
-    } else {
-        loadRoom(id);
+    if (!closeBtn) {
+        return;
     }
+    
+    const id = e.target.closest('.room').dataset.id;
+    closeRoom(id);
 });
 
 loadRoom('r1');
